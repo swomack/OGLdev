@@ -1,5 +1,9 @@
 #include "glew.h"
 #include "glut.h"
+#include "window_manager.h"
+
+
+window_manager window;
 
 void render()
 {
@@ -11,7 +15,13 @@ void render()
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
+	window.initialize_window(argv, argc);
+	window.set_params(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH, 1024, 768, 50, 20);
+	window.create_window("Tutorial 1");
+	window.set_render_function(render);
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+	window.start_message_loop();
+	/*glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 
 	glutInitWindowSize(1024, 768);
@@ -20,5 +30,5 @@ int main(int argc, char** argv)
 
 	glutDisplayFunc(render);
 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-	glutMainLoop();
+	glutMainLoop();*/
 }
