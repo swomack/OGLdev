@@ -21,14 +21,4 @@ int main(int argc, char** argv)
 	window.set_render_function(render);
 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 	window.start_message_loop();
-	/*glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-
-	glutInitWindowSize(1024, 768);
-	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Create Window");
-
-	glutDisplayFunc(render);
-	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-	glutMainLoop();*/
 }
