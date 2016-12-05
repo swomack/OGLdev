@@ -155,10 +155,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="OpenglRenderer.cpp" />
+    <ClCompile Include="RenderGeometry.cpp" />
+    <ClCompile Include="RenderMaterial.cpp" />
+    <ClCompile Include="RenderMesh.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="RenderScene.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="window_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="OpenglRenderer.h" />
+    <ClInclude Include="RenderGeometry.h" />
+    <ClInclude Include="RenderMaterial.h" />
+    <ClInclude Include="RenderMesh.h" />
+    <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="RenderScene.h" />
     <ClInclude Include="window_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
