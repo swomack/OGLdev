@@ -1,5 +1,8 @@
 #pragma once
 
+#include "glew.h"
+#include <iostream>
+
 class RenderScene;
 class Camera;
 
@@ -9,5 +12,8 @@ public:
 	OpenglRenderer();
 	~OpenglRenderer();
 
-	void renderScene(RenderScene* scene, Camera* camera);
+	void renderScene(RenderScene* scene = NULL, Camera* camera = NULL);
+
+	// set states
+	void setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
 };
