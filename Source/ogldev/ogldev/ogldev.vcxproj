@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Math3D.h" />
     <ClInclude Include="OpenglRenderer.h" />
     <ClInclude Include="RenderGeometry.h" />
     <ClInclude Include="RenderMaterial.h" />

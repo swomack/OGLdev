@@ -2,6 +2,7 @@
 #include "glut.h"
 #include "window_manager.h"
 #include "OpenglRenderer.h"
+#include "Math3D.h"
 
 
 window_manager window;
