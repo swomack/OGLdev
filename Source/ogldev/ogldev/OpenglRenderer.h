@@ -1,12 +1,13 @@
 #pragma once
 
 #include "glew.h"
+#include "GodObject.h"
 #include <iostream>
 
 class RenderScene;
 class Camera;
 
-class OpenglRenderer
+class OpenglRenderer : public GodObject
 {
 public:
 	OpenglRenderer();

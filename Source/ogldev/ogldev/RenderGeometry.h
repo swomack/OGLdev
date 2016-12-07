@@ -1,7 +1,8 @@
 #pragma once
 
+#include "GodObject.h"
 
-class RenderGeometry
+class RenderGeometry : public GodObject
 {
 public:
 	RenderGeometry();

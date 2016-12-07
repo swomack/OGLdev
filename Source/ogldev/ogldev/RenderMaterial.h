@@ -1,6 +1,8 @@
 #pragma once
 
-class RenderMaterial
+#include "GodObject.h"
+
+class RenderMaterial : public GodObject
 {
 public:
 	RenderMaterial();

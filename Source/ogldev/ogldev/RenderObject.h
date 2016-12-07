@@ -1,9 +1,11 @@
 #pragma once
 
+#include "GodObject.h"
+
 #include <vector>
 #include <string>
 
-class RenderObject
+class RenderObject : public GodObject
 {
 private:
 	std::vector<RenderObject*> children;
