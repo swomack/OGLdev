@@ -17,4 +17,8 @@ public:
 
 	// set states
 	void setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+
+protected:
+
+	void drawMesh(RenderMesh* mesh, Camera* camera, bool transparent = false);
 };
