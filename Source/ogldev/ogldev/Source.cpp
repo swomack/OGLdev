@@ -31,6 +31,19 @@ void initializeWindow(int argc, char** argv)
 	
 }
 
+bool initializeGlew()
+{
+	GLenum res = glewInit();
+
+	if (res != GLEW_OK)
+	{
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(res));
+		return false;
+	}
+
+	return true;
+}
+
 void startMessageLoop()
 {
 	window.start_message_loop();
@@ -39,6 +52,11 @@ void startMessageLoop()
 int main(int argc, char** argv)
 {
 	initializeWindow(argc, argv);
+	bool res = initializeGlew();
+
+	if (!res)
+		return 1;
+
 	initializeRenderer();
 	startMessageLoop();
 }

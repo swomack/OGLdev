@@ -18,8 +18,12 @@ void OpenglRenderer::renderScene(RenderScene * scene, Camera * camera)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	if (scene == NULL || camera == NULL)
+	if (scene == NULL)
 		return;
+
+
+
+
 }
 
 void OpenglRenderer::setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
