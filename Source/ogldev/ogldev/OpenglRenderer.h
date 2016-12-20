@@ -5,6 +5,7 @@
 #include <iostream>
 
 class RenderScene;
+class RenderMesh;
 class Camera;
 
 class OpenglRenderer : public GodObject
