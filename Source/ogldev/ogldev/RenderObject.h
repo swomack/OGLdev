@@ -11,11 +11,14 @@ private:
 	std::vector<RenderObject*> children;
 	RenderObject* parent;
 	std::string name;
+
 public:
 	RenderObject();
 	~RenderObject();
 
-	void setParent(RenderObject* parent_object);
-	void addChild(RenderObject* child_object);
-	void removeChild(RenderObject* child_object);
+	virtual void setParent(RenderObject* parent_object);
+	virtual void addChild(RenderObject* child_object);
+	virtual void removeChild(RenderObject* child_object);
+
+	std::vector<RenderObject*>& get_children();
 };

@@ -10,6 +10,8 @@ class RenderMesh : public RenderObject
 private:
 	RenderGeometry* geometry;
 	RenderMaterial* material;
+	int render_order;
+	bool transparent;
 
 public:
 	RenderMesh();
@@ -18,4 +20,9 @@ public:
 
 	void setGeometry(RenderGeometry* geometry);
 	void setMaterial(RenderMaterial* material);
+	void setTransparent(bool transparent);
+
+	RenderGeometry* getGeometry();
+	RenderMaterial* getMaterial();
+	bool getTransparent();
 };

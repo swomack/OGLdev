@@ -32,3 +32,8 @@ void RenderObject::removeChild(RenderObject * child_object)
 	child_object->setParent(NULL);
 }
 
+std::vector<RenderObject*>& RenderObject::get_children()
+{
+	return this->children;
+}
+

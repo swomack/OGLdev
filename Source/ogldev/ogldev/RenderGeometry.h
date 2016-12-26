@@ -21,6 +21,5 @@ public:
 public:
 
 	vertex_attributes geometry_vertex_attributes;
-
 };
 
