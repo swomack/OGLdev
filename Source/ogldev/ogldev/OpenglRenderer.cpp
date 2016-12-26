@@ -42,9 +42,41 @@ void OpenglRenderer::setClearColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a)
 	glClearColor(r, g, b, a);
 }
 
+GLuint OpenglRenderer::initializeVertexBuffer(RenderGeometry * geometry)
+{
+	GLuint VBO;
+
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(geometry->geometry_vertex_attributes.positions), &(geometry->geometry_vertex_attributes.positions[0]), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	return VBO;
+}
+
 void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 {
+	if (mesh == NULL)
+		return;
 
+	RenderGeometry* geom = mesh->getGeometry();
+
+	if (geom == NULL)
+		return;
+
+	const string string_id = geom->get_string_id();
+	if (uuid_geometry_map[string_id] == NULL)
+	{
+		GLuint vertex_buffer_id = initializeVertexBuffer(geom);
+		uuid_geometry_map[string_id] = vertex_buffer_id;
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, uuid_geometry_map[string_id]);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+	glDrawArrays(GL_POINTS, 0, 1);
+
+	glDisableVertexAttribArray(0);
 }
 
 void OpenglRenderer::fillTransparent(RenderObject * obj, std::vector<RenderMesh*>& transparent)

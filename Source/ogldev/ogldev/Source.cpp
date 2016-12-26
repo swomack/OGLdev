@@ -2,17 +2,24 @@
 #include "glut.h"
 #include "window_manager.h"
 #include "OpenglRenderer.h"
+#include "RenderObject.h"
+#include "RenderScene.h"
+#include "RenderMesh.h"
+#include "RenderGeometry.h"
 #include "Math3D.h"
+#include <vector>
+
+using namespace std;
 
 
 window_manager window;
 OpenglRenderer renderer;
 
-
+RenderScene *main_scene = NULL;
 
 void render()
 {
-	renderer.renderScene();
+	renderer.renderScene(main_scene);
 	glutSwapBuffers();
 }
 
@@ -49,6 +56,23 @@ void startMessageLoop()
 	window.start_message_loop();
 }
 
+void createScene()
+{
+	main_scene = new RenderScene();
+
+	vector<Vector3> points;
+	Vector3 point(0.0f, 0.0f, 0.0f);
+	points.push_back(point);
+
+	RenderGeometry* geom = new RenderGeometry();
+	geom->setPosition(points);
+
+	RenderMesh* mesh = new RenderMesh();
+	mesh->setGeometry(geom);
+
+	main_scene->addChild(mesh);
+}
+
 int main(int argc, char** argv)
 {
 	initializeWindow(argc, argv);
@@ -58,5 +82,8 @@ int main(int argc, char** argv)
 		return 1;
 
 	initializeRenderer();
+
+	createScene();
+
 	startMessageLoop();
 }

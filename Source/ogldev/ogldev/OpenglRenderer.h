@@ -24,6 +24,7 @@ public:
 
 protected:
 
+	GLuint initializeVertexBuffer(RenderGeometry* geometry);
 	void drawMesh(RenderMesh* mesh, Camera* camera);
 
 	void fillTransparent(RenderObject* obj, std::vector<RenderMesh*> &transparent);
@@ -32,5 +33,5 @@ protected:
 	void renderTransparent(std::vector<RenderMesh*> &transparent, Camera* camera);
 	void renderOpaque(std::vector<RenderMesh*> &opaque, Camera* camera);
 
-	std::unordered_map<std::string, RenderGeometry*> uuid_geometry_map;
+	std::unordered_map<std::string, GLuint> uuid_geometry_map;
 };

@@ -101,6 +101,13 @@ public:
 		this->z = z;
 	}
 
+	void set(float x, float y, float z)
+	{
+		this->x = x;
+		this->y = y;
+		this->z = z;
+	}
+
 	Vector3 operator + (Vector3& operand)
 	{
 		Vector3 result(x + operand.x, y + operand.y, z + operand.z);
