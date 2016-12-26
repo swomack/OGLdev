@@ -30,7 +30,7 @@ void OpenglRenderer::renderScene(RenderScene * scene, Camera * camera)
 
 	// fill the transparent mesh and opaque mesh list and draw them
 	fillTransparent(scene, transparent);
-	fillOpaque(scene, transparent);
+	fillOpaque(scene, opaque);
 
 	//render opaque first, then transparent
 	renderOpaque(opaque, camera);
