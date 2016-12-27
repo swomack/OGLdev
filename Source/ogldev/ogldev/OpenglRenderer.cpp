@@ -64,17 +64,17 @@ void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 		return;
 
 	const string string_id = geom->get_string_id();
-	if (uuid_geometry_map[string_id] == NULL)
+	if (uuid_VBO_map[string_id] == NULL)
 	{
 		GLuint vertex_buffer_id = initializeVertexBuffer(geom);
-		uuid_geometry_map[string_id] = vertex_buffer_id;
+		uuid_VBO_map[string_id] = vertex_buffer_id;
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, uuid_geometry_map[string_id]);
+	glBindBuffer(GL_ARRAY_BUFFER, uuid_VBO_map[string_id]);
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	glDrawArrays(GL_POINTS, 0, 1);
+	glDrawArrays(geom->getPrimitiveType(), 0, geom->getNumberofDrawableVertices());
 
 	glDisableVertexAttribArray(0);
 }

@@ -1,9 +1,10 @@
+#include "PrimitiveDefinitions.h"
 #include "RenderGeometry.h"
 #include <algorithm>
 
 using namespace std;
 
-RenderGeometry::RenderGeometry()
+RenderGeometry::RenderGeometry(): primitive_type(POINT_PRIMITIVE)
 {
 }
 
@@ -26,5 +27,20 @@ void RenderGeometry::setPosition(Vector3 * positions, int n)
 
 	for (int i = 0; i < n; i++)
 		geometry_vertex_attributes.positions.push_back(positions[i]);
+}
+
+unsigned int RenderGeometry::getNumberofDrawableVertices()
+{
+	return geometry_vertex_attributes.positions.size();
+}
+
+void RenderGeometry::setPrimitiveType(unsigned int primitive_type)
+{
+	this->primitive_type = primitive_type;
+}
+
+unsigned int RenderGeometry::getPrimitiveType()
+{
+	return primitive_type;
 }
 

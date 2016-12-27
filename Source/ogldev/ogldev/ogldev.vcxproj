@@ -172,6 +172,7 @@
     <ClInclude Include="GodObject.h" />
     <ClInclude Include="Math3D.h" />
     <ClInclude Include="OpenglRenderer.h" />
+    <ClInclude Include="PrimitiveDefinitions.h" />
     <ClInclude Include="RenderGeometry.h" />
     <ClInclude Include="RenderMaterial.h" />
     <ClInclude Include="RenderMesh.h" />

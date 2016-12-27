@@ -15,11 +15,21 @@ public:
 	RenderGeometry();
 	~RenderGeometry();
 
-	void setPosition(std::vector<Vector3> positions);
-	void setPosition(Vector3 *positions, int n);
+	virtual void setPosition(std::vector<Vector3> positions);
+	virtual void setPosition(Vector3 *positions, int n);
+
+	virtual unsigned int getNumberofDrawableVertices();
+
+	void setPrimitiveType(unsigned int primitive_type);
+
+	unsigned int getPrimitiveType();
 
 public:
 
 	vertex_attributes geometry_vertex_attributes;
+
+protected:
+
+	unsigned int primitive_type;
 };
 

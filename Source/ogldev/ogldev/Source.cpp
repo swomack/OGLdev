@@ -7,6 +7,7 @@
 #include "RenderMesh.h"
 #include "RenderGeometry.h"
 #include "Math3D.h"
+#include "PrimitiveDefinitions.h"
 #include <vector>
 
 using namespace std;
@@ -66,6 +67,7 @@ void createScene()
 
 	RenderGeometry* geom = new RenderGeometry();
 	geom->setPosition(points);
+	geom->setPrimitiveType(POINT_PRIMITIVE);
 
 	RenderMesh* mesh = new RenderMesh();
 	mesh->setGeometry(geom);
