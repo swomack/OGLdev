@@ -20,6 +20,10 @@ public:
 
 	virtual unsigned int getNumberofDrawableVertices();
 
+	virtual size_t getVerticesPositionAttributeSize();
+	virtual Vector3* getVerticesPositionAttributeReference();
+
+
 	void setPrimitiveType(unsigned int primitive_type);
 
 	unsigned int getPrimitiveType();

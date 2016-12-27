@@ -48,7 +48,7 @@ GLuint OpenglRenderer::initializeVertexBuffer(RenderGeometry * geometry)
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(geometry->geometry_vertex_attributes.positions), &(geometry->geometry_vertex_attributes.positions[0]), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, geometry->getVerticesPositionAttributeSize(), geometry->getVerticesPositionAttributeReference(), GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	return VBO;
 }

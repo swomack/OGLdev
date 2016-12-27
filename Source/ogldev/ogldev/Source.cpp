@@ -61,13 +61,15 @@ void createScene()
 {
 	main_scene = new RenderScene();
 
-	vector<Vector3> points;
-	Vector3 point(0.0f, 0.0f, 0.0f);
-	points.push_back(point);
+	vector<Vector3> vertices(3);
+	vertices[0] = Vector3(0.0f, 1.0f, 0.0f);
+	vertices[1] = Vector3(-1.0f, -1.0f, 0.0f);
+	vertices[2] = Vector3(1.0f, -1.0f, 0.0f);
+	
 
 	RenderGeometry* geom = new RenderGeometry();
-	geom->setPosition(points);
-	geom->setPrimitiveType(POINT_PRIMITIVE);
+	geom->setPosition(vertices);
+	geom->setPrimitiveType(TRIANGLE_PRIMITIVE);
 
 	RenderMesh* mesh = new RenderMesh();
 	mesh->setGeometry(geom);

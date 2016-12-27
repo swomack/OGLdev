@@ -34,6 +34,16 @@ unsigned int RenderGeometry::getNumberofDrawableVertices()
 	return geometry_vertex_attributes.positions.size();
 }
 
+size_t RenderGeometry::getVerticesPositionAttributeSize()
+{
+	return sizeof(Vector3) * geometry_vertex_attributes.positions.size();
+}
+
+Vector3* RenderGeometry::getVerticesPositionAttributeReference()
+{
+	return &(geometry_vertex_attributes.positions[0]);
+}
+
 void RenderGeometry::setPrimitiveType(unsigned int primitive_type)
 {
 	this->primitive_type = primitive_type;
