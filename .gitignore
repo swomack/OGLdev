@@ -30,3 +30,4 @@ Source/ogldev/ogldev/x64/Debug/ogldev.tlog/CL.write.1.tlog
 Source/ogldev/ogldev/x64/Debug/ogldev.tlog/ogldev.lastbuildstate
 Source/ogldev/ogldev/x64/Debug/vc140.idb
 *.tlog
+*.obj
