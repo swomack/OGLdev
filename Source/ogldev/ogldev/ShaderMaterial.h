@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RenderMaterial.h"
+#include "glew.h"
 #include <string>
 
 class Shadermaterial : public RenderMaterial
@@ -14,4 +15,6 @@ protected:
 	std::string fragment_shader_source;
 	std::string geometry_shader_source;
 	std::string tessellation_shader_source;
+
+	GLuint shaderProgram;
 };

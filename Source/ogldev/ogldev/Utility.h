@@ -11,6 +11,8 @@
 #include <istream>
 #include <sstream>
 
+#include "glew.h"
+
 typedef  boost::uuids::uuid uuid;
 
 class IDGenerator
@@ -23,7 +25,16 @@ public:
 	}
 };
 
-namespace ogl_dev
+namespace ogldev_utility
 {
 	std::string readFile(std::experimental::filesystem::path filePath);
+};
+
+namespace ogldev_graphics_utlity
+{
+
+	GLuint generateShaderProgram(const std::string& vertex_shader_source, const std::string& fragment_shader_source, 
+		const std::string& geometry_shader_source, const std::string& tessellation_shader_source);
+
+	GLuint generateShaderObject(const std::string& shader_source, GLuint shaderType);
 };

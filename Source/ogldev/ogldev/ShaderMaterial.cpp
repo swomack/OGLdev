@@ -1,4 +1,5 @@
 #include "ShaderMaterial.h"
+#include "Utility.h"
 
 Shadermaterial::Shadermaterial(std::string vertex_shader_source, std::string fargment_shader_source, std::string geometry_shader_source, std::string tessellation_shader_source)
 {
