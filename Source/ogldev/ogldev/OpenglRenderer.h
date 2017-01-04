@@ -10,6 +10,9 @@ class RenderGeometry;
 class RenderMesh;
 class Camera;
 class RenderObject;
+class RenderMaterial;
+class ShaderMaterial;
+
 
 class OpenglRenderer : public GodObject
 {
@@ -26,6 +29,8 @@ protected:
 
 	GLuint initializeVertexBuffer(RenderGeometry* geometry);
 	void drawMesh(RenderMesh* mesh, Camera* camera);
+	void initiateMaterial(RenderMaterial* material);
+	void initiateShaderMaterial(ShaderMaterial* shader_material);
 
 	void fillTransparent(RenderObject* obj, std::vector<RenderMesh*> &transparent);
 	void fillOpaque(RenderObject* obj, std::vector<RenderMesh*> &opaque);

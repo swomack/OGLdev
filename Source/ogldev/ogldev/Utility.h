@@ -34,7 +34,7 @@ namespace ogldev_graphics_utlity
 {
 
 	GLuint generateShaderProgram(const std::string& vertex_shader_source, const std::string& fragment_shader_source, 
-		const std::string& geometry_shader_source, const std::string& tessellation_shader_source);
+		const std::string& geometry_shader_source = "", const std::string& tessellation_shader_source = "");
 
 	GLuint generateShaderObject(const std::string& shader_source, GLuint shaderType);
 };

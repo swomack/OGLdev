@@ -5,6 +5,8 @@
 #include "Camera.h"
 #include "RenderMaterial.h"
 #include "RenderGeometry.h"
+#include "ShaderMaterial.h"
+
 #include <vector>
 
 using namespace std;
@@ -59,6 +61,7 @@ void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 		return;
 
 	RenderGeometry* geom = mesh->getGeometry();
+	RenderMaterial* material = mesh->getMaterial();
 
 	if (geom == NULL)
 		return;
@@ -74,9 +77,26 @@ void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
+	if (material)
+		initiateMaterial(material);
+
 	glDrawArrays(geom->getPrimitiveType(), 0, geom->getNumberofDrawableVertices());
 
 	glDisableVertexAttribArray(0);
+}
+
+void OpenglRenderer::initiateMaterial(RenderMaterial * material)
+{
+	ShaderMaterial* shader_material = dynamic_cast<ShaderMaterial*> (material);
+	initiateShaderMaterial(shader_material);
+}
+
+void OpenglRenderer::initiateShaderMaterial(ShaderMaterial * shader_material)
+{
+	GLuint shader_program = shader_material->getShaderProgram();
+
+	if (shader_program > 0)
+		glUseProgram(shader_program);
 }
 
 void OpenglRenderer::fillTransparent(RenderObject * obj, std::vector<RenderMesh*>& transparent)
