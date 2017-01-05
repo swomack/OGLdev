@@ -8,6 +8,8 @@
 #include "RenderGeometry.h"
 #include "Math3D.h"
 #include "PrimitiveDefinitions.h"
+#include "ShaderMaterial.h"
+
 #include <vector>
 
 using namespace std;
@@ -71,8 +73,11 @@ void createScene()
 	geom->setPosition(vertices);
 	geom->setPrimitiveType(TRIANGLE_PRIMITIVE);
 
+	ShaderMaterial* material = new ShaderMaterial("Shaders/VertexShader.txt", "Shaders/FragmentShader.txt");
+
 	RenderMesh* mesh = new RenderMesh();
 	mesh->setGeometry(geom);
+	mesh->setMaterial(material);
 
 	main_scene->addChild(mesh);
 }
