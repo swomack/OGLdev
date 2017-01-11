@@ -93,10 +93,46 @@ void OpenglRenderer::initiateMaterial(RenderMaterial * material)
 
 void OpenglRenderer::initiateShaderMaterial(ShaderMaterial * shader_material)
 {
-	GLuint shader_program = shader_material->getShaderProgram();
+	if (shader_material == NULL || shader_material->getShaderProgram() == 0)
+		return;
 
-	if (shader_program > 0)
-		glUseProgram(shader_program);
+	GLuint shader_program = shader_material->getShaderProgram();
+	glUseProgram(shader_program);
+
+	if (shader_material->getUniformNeedsUpdate())
+	{
+		updateUniforms(shader_material);
+		shader_material->setUniformNeedsUpdate(false);
+	}
+		
+}
+
+void OpenglRenderer::updateUniforms(ShaderMaterial * shader_material)
+{
+	if (shader_material == NULL || shader_material->getShaderProgram() == 0)
+		return;
+
+	auto integer_uniforms = shader_material->getUniforms1i();
+
+	for_each(integer_uniforms.begin(), integer_uniforms.end(), [shader_material](auto element) {
+		GLuint location = glGetUniformLocation(shader_material->getShaderProgram(), element.first.c_str());
+
+		if (location == 0xFFFFFFFF)
+			return;
+
+		glUniform1i(location, element.second);
+	});
+
+	auto float_uniforms = shader_material->getUniforms1f();
+
+	for_each(float_uniforms.begin(), float_uniforms.end(), [shader_material](auto element) {
+		GLuint location = glGetUniformLocation(shader_material->getShaderProgram(), element.first.c_str());
+
+		if (location == 0xFFFFFFFF)
+			return;
+
+		glUniform1f(location, element.second);
+	});
 }
 
 void OpenglRenderer::fillTransparent(RenderObject * obj, std::vector<RenderMesh*>& transparent)

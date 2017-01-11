@@ -31,6 +31,7 @@ protected:
 	void drawMesh(RenderMesh* mesh, Camera* camera);
 	void initiateMaterial(RenderMaterial* material);
 	void initiateShaderMaterial(ShaderMaterial* shader_material);
+	void updateUniforms(ShaderMaterial* shader_material);
 
 	void fillTransparent(RenderObject* obj, std::vector<RenderMesh*> &transparent);
 	void fillOpaque(RenderObject* obj, std::vector<RenderMesh*> &opaque);
