@@ -16,6 +16,8 @@ public:
 
 	void set_render_function(void (*func) (void));
 
+	void set_idle_function(void(*func) (void));
+
 	void start_message_loop();
 
 private:

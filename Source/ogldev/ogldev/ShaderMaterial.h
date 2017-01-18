@@ -19,8 +19,8 @@ public:
 	std::vector<std::pair<std::string, int>> getUniforms1i();
 	std::vector<std::pair<std::string, float>> getUniforms1f();
 
-	void update_uniform1i(std::string uniform_name, int new_value);
-	void update_uniform1f(std::string uniform_name, float new_value);
+	void updateUniform1i(std::string uniform_name, int new_value);
+	void updateUniform1f(std::string uniform_name, float new_value);
 
 	void setUniformNeedsUpdate(bool value = false);
 	bool getUniformNeedsUpdate();

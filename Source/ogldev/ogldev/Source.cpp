@@ -20,10 +20,30 @@ OpenglRenderer renderer;
 
 RenderScene *main_scene = NULL;
 
+
+void update_uniform()
+{
+	static float scale = 0.0f;
+
+	scale += 0.01f;
+
+	if (main_scene)
+	{
+		RenderMesh* mesh = dynamic_cast<RenderMesh*> (main_scene->getObjectByName("ScaleMesh"));
+
+		if (mesh)
+		{
+			ShaderMaterial* material = dynamic_cast<ShaderMaterial*> (mesh->getMaterial());
+
+			if (material)
+				material->updateUniform1f("gScale", sinf(scale));
+		}
+	}
+}
+
 void render()
 {
-
-
+	update_uniform();
 	renderer.renderScene(main_scene);
 	glutSwapBuffers();
 }
@@ -40,7 +60,7 @@ void initializeWindow(int argc, char** argv)
 	window.set_params(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH, 1024, 768, 50, 20);
 	window.create_window("Tutorial 1");
 	window.set_render_function(render);
-	
+	window.set_idle_function(render);
 }
 
 bool initializeGlew()
@@ -78,7 +98,7 @@ void createScene()
 	ShaderMaterial* material = new ShaderMaterial("Shaders/VertexShader.txt", "Shaders/FragmentShader.txt");
 	material->addUniform1f("gScale", 0.0f);
 
-	RenderMesh* mesh = new RenderMesh();
+	RenderMesh* mesh = new RenderMesh("ScaleMesh");
 	mesh->setGeometry(geom);
 	mesh->setMaterial(material);
 

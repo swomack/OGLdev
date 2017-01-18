@@ -58,12 +58,12 @@ std::vector<std::pair<std::string, float>> ShaderMaterial::getUniforms1f()
 			(*res).second = c;											\
 			d = true;													
 
-void ShaderMaterial::update_uniform1i(string uniform_name, int new_value)
+void ShaderMaterial::updateUniform1i(string uniform_name, int new_value)
 {
 	UPDATE_UNIFORM(integer_uniforms, uniform_name, new_value, uniforms_needs_update)
 }
 
-void ShaderMaterial::update_uniform1f(string uniform_name, float new_value)
+void ShaderMaterial::updateUniform1f(string uniform_name, float new_value)
 {
 	UPDATE_UNIFORM(float_uniforms, uniform_name, new_value, uniforms_needs_update)
 }

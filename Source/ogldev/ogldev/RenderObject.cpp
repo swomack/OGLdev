@@ -34,12 +34,12 @@ void RenderObject::removeChild(RenderObject * child_object)
 	child_object->setParent(NULL);
 }
 
-RenderObject * RenderObject::getObjectByName(std::string & name)
+RenderObject * RenderObject::getObjectByName(std::string name)
 {
 	if (children.size() <= 0)
 		return nullptr;
 
-	auto res = find_if(children.begin(), children.end(), [name](auto element) {
+	auto res = find_if(children.begin(), children.end(), [&name](auto element) {
 		if (element->getName() == name)
 			return true;
 

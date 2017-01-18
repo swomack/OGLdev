@@ -40,6 +40,11 @@ void window_manager::set_render_function(void(*func) (void))
 	glutDisplayFunc(func);
 }
 
+void window_manager::set_idle_function(void(*func)(void))
+{
+	glutIdleFunc(func);
+}
+
 void window_manager::start_message_loop()
 {
 	glutMainLoop();
