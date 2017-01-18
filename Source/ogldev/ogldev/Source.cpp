@@ -22,6 +22,8 @@ RenderScene *main_scene = NULL;
 
 void render()
 {
+
+
 	renderer.renderScene(main_scene);
 	glutSwapBuffers();
 }
@@ -74,6 +76,7 @@ void createScene()
 	geom->setPrimitiveType(TRIANGLE_PRIMITIVE);
 
 	ShaderMaterial* material = new ShaderMaterial("Shaders/VertexShader.txt", "Shaders/FragmentShader.txt");
+	material->addUniform1f("gScale", 0.0f);
 
 	RenderMesh* mesh = new RenderMesh();
 	mesh->setGeometry(geom);

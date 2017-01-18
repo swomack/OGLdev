@@ -7,12 +7,14 @@
 
 using namespace std;
 
-RenderObject::RenderObject()
+RenderObject::RenderObject(string name)
 {
+	this->name = name;
 }
 
 RenderObject::~RenderObject()
 {
+
 }
 
 void RenderObject::setParent(RenderObject * parent_object)
@@ -32,7 +34,40 @@ void RenderObject::removeChild(RenderObject * child_object)
 	child_object->setParent(NULL);
 }
 
-std::vector<RenderObject*>& RenderObject::get_children()
+RenderObject * RenderObject::getObjectByName(std::string & name)
+{
+	if (children.size() <= 0)
+		return nullptr;
+
+	auto res = find_if(children.begin(), children.end(), [name](auto element) {
+		if (element->getName() == name)
+			return true;
+
+		return false;
+	});
+
+	if (res != children.end())
+		return *res;
+
+	for (int i = 0; i < children.size(); i++)
+	{
+		auto elem = children[i]->getObjectByName(name);
+
+		if (elem == nullptr)
+			continue;
+
+		return elem;
+	}
+
+	return nullptr;
+}
+
+string RenderObject::getName()
+{
+	return name;
+}
+
+std::vector<RenderObject*>& RenderObject::getChildren()
 {
 	return this->children;
 }

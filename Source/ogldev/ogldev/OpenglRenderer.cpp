@@ -145,7 +145,7 @@ void OpenglRenderer::fillTransparent(RenderObject * obj, std::vector<RenderMesh*
 	if (mesh != NULL && mesh->getTransparent() == true)
 		transparent.push_back(mesh);
 
-	vector<RenderObject*> children = obj->get_children();
+	vector<RenderObject*> children = obj->getChildren();
 	for_each(children.begin(), children.end(), [this, &transparent](auto element) {
 		this->fillTransparent(element, transparent);
 	});
@@ -161,7 +161,7 @@ void OpenglRenderer::fillOpaque(RenderObject * obj, std::vector<RenderMesh*>& op
 	if (mesh != NULL && mesh->getTransparent() == false)
 		opaque.push_back(mesh);
 
-	vector<RenderObject*> children = obj->get_children();
+	vector<RenderObject*> children = obj->getChildren();
 	for_each(children.begin(), children.end(), [this, &opaque](auto element) {
 		this->fillOpaque(element, opaque);
 	});

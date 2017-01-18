@@ -1,6 +1,8 @@
 #include "RenderScene.h"
 
-RenderScene::RenderScene()
+using namespace std;
+
+RenderScene::RenderScene(string name) : RenderObject(name)
 {
 }
 

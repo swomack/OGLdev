@@ -1,12 +1,18 @@
 #include "RenderMesh.h"
 
-RenderMesh::RenderMesh() : geometry(NULL), material(NULL), render_order(0),transparent(false)
+using namespace std;
+
+RenderMesh::RenderMesh(string name) :	RenderObject(name), 
+										geometry(NULL), material(NULL), 
+										render_order(0),transparent(false)
 {
 }
 
-RenderMesh::RenderMesh(RenderGeometry * geometry, RenderMaterial * material) : geometry(geometry),
-																				material(material), render_order(0), transparent(false)
+RenderMesh::RenderMesh(RenderGeometry * geometry, RenderMaterial * material, string name) 
+	:	RenderObject(name), geometry(geometry), material(material), 
+		render_order(0), transparent(false)
 {
+
 }
 
 RenderMesh::~RenderMesh()

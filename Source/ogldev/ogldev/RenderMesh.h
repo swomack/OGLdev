@@ -14,8 +14,8 @@ private:
 	bool transparent;
 
 public:
-	RenderMesh();
-	RenderMesh(RenderGeometry* geometry, RenderMaterial* material);
+	RenderMesh(std::string name = "");
+	RenderMesh(RenderGeometry* geometry, RenderMaterial* material, std::string name = "");
 	~RenderMesh();
 
 	void setGeometry(RenderGeometry* geometry);

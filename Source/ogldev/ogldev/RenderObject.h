@@ -13,12 +13,15 @@ private:
 	std::string name;
 
 public:
-	RenderObject();
+	RenderObject(std::string name = "");
 	~RenderObject();
 
 	virtual void setParent(RenderObject* parent_object);
 	virtual void addChild(RenderObject* child_object);
 	virtual void removeChild(RenderObject* child_object);
+	virtual RenderObject* getObjectByName(std::string& name);
 
-	std::vector<RenderObject*>& get_children();
+	std::string getName();
+
+	std::vector<RenderObject*>& getChildren();
 };

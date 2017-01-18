@@ -5,6 +5,6 @@
 class RenderScene : public RenderObject
 {
 public:
-	RenderScene();
+	RenderScene(std::string name = "");
 	~RenderScene();
 };
