@@ -170,3 +170,26 @@ public:
 	}
 };
 
+class Matrix4f
+{
+public:
+	float m[4][4];
+
+	Matrix4f& operator *= (const Matrix4f& rhs)
+	{
+		float res[4][4];
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				//res[i][j] = ;
+			}
+		}
+	}
+
+	Matrix4f operator * (const Matrix4f& rhs)
+	{
+
+	}
+};
+

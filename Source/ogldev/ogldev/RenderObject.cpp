@@ -7,9 +7,12 @@
 
 using namespace std;
 
-RenderObject::RenderObject(string name)
+RenderObject::RenderObject(string name) : position(0, 0, 0)
 {
 	this->name = name;
+
+	updateMatrix();
+	updateWorldMatrix();
 }
 
 RenderObject::~RenderObject()
@@ -70,5 +73,32 @@ string RenderObject::getName()
 std::vector<RenderObject*>& RenderObject::getChildren()
 {
 	return this->children;
+}
+
+void RenderObject::setPosition(float x, float y, float z)
+{
+	position.x = x;
+	position.y = y;
+	position.z = z;
+}
+
+void RenderObject::setPosition(const Vector3 & position)
+{
+	this->position.x = position.x;
+	this->position.y = position.y;
+	this->position.z = position.z;
+}
+
+void RenderObject::updateMatrix()
+{
+	// we need to multiply position, rotation and scale matrix here
+	local_matrix.m[0][0] = 1.0f; local_matrix.m[0][1] = 0.0f; local_matrix.m[0][2] = 0.0f; local_matrix.m[0][3] = position.x;
+	local_matrix.m[1][0] = 0.0f; local_matrix.m[1][1] = 1.0f; local_matrix.m[1][2] = 0.0f; local_matrix.m[1][3] = position.y;
+	local_matrix.m[2][0] = 0.0f; local_matrix.m[2][1] = 0.0f; local_matrix.m[2][2] = 1.0f; local_matrix.m[2][3] = position.z;
+	local_matrix.m[3][0] = 0.0f; local_matrix.m[3][1] = 0.0f; local_matrix.m[3][2] = 0.0f; local_matrix.m[3][3] = 1.0f;
+}
+
+void RenderObject::updateWorldMatrix()
+{
 }
 
