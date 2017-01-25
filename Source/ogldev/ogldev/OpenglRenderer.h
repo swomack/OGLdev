@@ -2,6 +2,7 @@
 
 #include "glew.h"
 #include "GodObject.h"
+#include "VertexShaderTransformationUniforms.h"
 #include <iostream>
 #include <unordered_map>
 
@@ -30,6 +31,7 @@ protected:
 	GLuint initializeVertexBuffer(RenderGeometry* geometry);
 	void drawMesh(RenderMesh* mesh, Camera* camera);
 	void initiateMaterial(RenderMaterial* material);
+	void updateTransformationMatrixUniforms(RenderMesh* mesh, RenderMaterial* material);
 	void initiateShaderMaterial(ShaderMaterial* shader_material);
 	void updateUniforms(ShaderMaterial* shader_material);
 

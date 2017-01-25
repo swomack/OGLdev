@@ -35,4 +35,6 @@ protected:
 	Vector3 position;
 	Matrix4f local_matrix;
 	Matrix4f world_matrix;
+
+	friend class OpenglRenderer;
 };

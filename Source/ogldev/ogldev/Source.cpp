@@ -33,10 +33,7 @@ void update_uniform()
 
 		if (mesh)
 		{
-			ShaderMaterial* material = dynamic_cast<ShaderMaterial*> (mesh->getMaterial());
-
-			if (material)
-				material->updateUniform1f("gScale", sinf(scale));
+			mesh->setPosition(sinf(scale), 0.0f, 0.0f);
 		}
 	}
 }
@@ -96,8 +93,6 @@ void createScene()
 	geom->setPrimitiveType(TRIANGLE_PRIMITIVE);
 
 	ShaderMaterial* material = new ShaderMaterial("Shaders/VertexShader.txt", "Shaders/FragmentShader.txt");
-	material->addUniform1f("gScale", 0.0f);
-
 	RenderMesh* mesh = new RenderMesh("ScaleMesh");
 	mesh->setGeometry(geom);
 	mesh->setMaterial(material);

@@ -182,14 +182,46 @@ public:
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				//res[i][j] = ;
+				res[i][j] = m[i][0] * rhs.m[0][j] + m[i][1] * rhs.m[1][j] + m[i][2] * rhs.m[2][j] + m[i][3] * rhs.m[3][j];
 			}
 		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				m[i][j] = res[i][j];
+			}
+		}
+
+		return *this;
 	}
 
-	Matrix4f operator * (const Matrix4f& rhs)
+	Matrix4f operator * (const Matrix4f& rhs) const
 	{
+		Matrix4f res;
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				res.m[i][j] = m[i][0] * rhs.m[0][j] + m[i][1] * rhs.m[1][j] + m[i][2] * rhs.m[2][j] + m[i][3] * rhs.m[3][j];
+			}
+		}
 
+		return res;
+	}
+
+	Matrix4f& copy(const Matrix4f& source_matrix)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				m[i][j] = source_matrix.m[i][j];
+			}
+		}
+
+		return *this;
 	}
 };
 

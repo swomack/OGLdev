@@ -13,10 +13,12 @@ using namespace std;
 
 OpenglRenderer::OpenglRenderer()
 {
+	
 }
 
 OpenglRenderer::~OpenglRenderer()
 {
+	
 }
 
 void OpenglRenderer::renderScene(RenderScene * scene, Camera * camera)
@@ -26,6 +28,9 @@ void OpenglRenderer::renderScene(RenderScene * scene, Camera * camera)
 	if (scene == NULL)
 		return;
 
+
+	// update the world matrices of all the elements
+	scene->updateWorldMatrix();
 
 	vector<RenderMesh*> transparent;
 	vector<RenderMesh*> opaque;
@@ -80,6 +85,8 @@ void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 	if (material)
 		initiateMaterial(material);
 
+	updateTransformationMatrixUniforms(mesh, material);
+
 	glDrawArrays(geom->getPrimitiveType(), 0, geom->getNumberofDrawableVertices());
 
 	glDisableVertexAttribArray(0);
@@ -89,6 +96,17 @@ void OpenglRenderer::initiateMaterial(RenderMaterial * material)
 {
 	ShaderMaterial* shader_material = dynamic_cast<ShaderMaterial*> (material);
 	initiateShaderMaterial(shader_material);
+}
+
+void OpenglRenderer::updateTransformationMatrixUniforms(RenderMesh * object, RenderMaterial* material)
+{
+	ShaderMaterial* shader_material = dynamic_cast<ShaderMaterial*> (material);
+	GLuint gWorldLocation = glGetUniformLocation(shader_material->getShaderProgram(), world_matrix.c_str());
+
+	if (gWorldLocation != 0xFFFFFFFF)
+	{
+		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, &object->world_matrix.m[0][0]);
+	}
 }
 
 void OpenglRenderer::initiateShaderMaterial(ShaderMaterial * shader_material)

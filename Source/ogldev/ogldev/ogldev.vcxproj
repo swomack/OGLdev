@@ -182,6 +182,7 @@
     <ClInclude Include="RenderScene.h" />
     <ClInclude Include="ShaderMaterial.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="VertexShaderTransformationUniforms.h" />
     <ClInclude Include="window_manager.h" />
   </ItemGroup>
   <ItemGroup>

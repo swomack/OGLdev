@@ -95,6 +95,9 @@
     <ClInclude Include="ShaderMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VertexShaderTransformationUniforms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\FragmentShader.txt">

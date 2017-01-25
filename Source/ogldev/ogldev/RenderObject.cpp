@@ -7,7 +7,7 @@
 
 using namespace std;
 
-RenderObject::RenderObject(string name) : position(0, 0, 0)
+RenderObject::RenderObject(string name) : parent(NULL), position(0, 0, 0)
 {
 	this->name = name;
 
@@ -100,5 +100,18 @@ void RenderObject::updateMatrix()
 
 void RenderObject::updateWorldMatrix()
 {
+	updateMatrix();
+	if (parent == NULL)
+	{
+		world_matrix.copy(local_matrix);
+	}
+	else
+	{
+		world_matrix = parent->world_matrix * local_matrix;
+	}
+
+	for_each(children.begin(), children.end(), [](auto element) {
+		element->updateWorldMatrix();
+	});
 }
 
