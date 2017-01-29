@@ -28,11 +28,16 @@ public:
 
 	void setPosition(float x, float y, float z);
 	void setPosition(const Vector3& position);
+	void setRotation(float x, float y, float z);
+	void rotateX(float x);
+	void rotateY(float y);
+	void rotateZ(float z);
 	void updateMatrix();
 	void updateWorldMatrix();
 
 protected:
 	Vector3 position;
+	Vector3 rotation;
 	Matrix4f local_matrix;
 	Matrix4f world_matrix;
 

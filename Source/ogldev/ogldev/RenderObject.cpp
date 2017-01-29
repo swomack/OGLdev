@@ -7,7 +7,7 @@
 
 using namespace std;
 
-RenderObject::RenderObject(string name) : parent(NULL), position(0, 0, 0)
+RenderObject::RenderObject(string name) : parent(NULL), position(0, 0, 0), rotation(0, 0, 0)
 {
 	this->name = name;
 
@@ -87,6 +87,28 @@ void RenderObject::setPosition(const Vector3 & position)
 	this->position.x = position.x;
 	this->position.y = position.y;
 	this->position.z = position.z;
+}
+
+void RenderObject::setRotation(float x, float y, float z)
+{
+	rotation.x = x;
+	rotation.y = y;
+	rotation.z = z;
+}
+
+void RenderObject::rotateX(float x)
+{
+	rotation.x = x;
+}
+
+void RenderObject::rotateY(float y)
+{
+	rotation.y = y;
+}
+
+void RenderObject::rotateZ(float z)
+{
+	rotation.z = z;
 }
 
 void RenderObject::updateMatrix()
