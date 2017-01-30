@@ -1,11 +1,13 @@
 #include "RenderObject.h"
 #include "RenderGeometry.h"
 #include "RenderMaterial.h"
+#include "Utility.h"
 
 #include <iostream>
 #include <algorithm>
 
 using namespace std;
+using namespace ogldev_math_utility;
 
 RenderObject::RenderObject(string name) : parent(NULL), position(0, 0, 0), rotation(0, 0, 0)
 {
@@ -114,10 +116,42 @@ void RenderObject::rotateZ(float z)
 void RenderObject::updateMatrix()
 {
 	// we need to multiply position, rotation and scale matrix here
-	local_matrix.m[0][0] = 1.0f; local_matrix.m[0][1] = 0.0f; local_matrix.m[0][2] = 0.0f; local_matrix.m[0][3] = position.x;
-	local_matrix.m[1][0] = 0.0f; local_matrix.m[1][1] = 1.0f; local_matrix.m[1][2] = 0.0f; local_matrix.m[1][3] = position.y;
-	local_matrix.m[2][0] = 0.0f; local_matrix.m[2][1] = 0.0f; local_matrix.m[2][2] = 1.0f; local_matrix.m[2][3] = position.z;
-	local_matrix.m[3][0] = 0.0f; local_matrix.m[3][1] = 0.0f; local_matrix.m[3][2] = 0.0f; local_matrix.m[3][3] = 1.0f;
+
+	Matrix4f rot_x_mat;
+
+	rot_x_mat.m[0][0] = 1.0f; rot_x_mat.m[0][1] = 0.0f;								rot_x_mat.m[0][2] = 0.0f;							rot_x_mat.m[0][3] = 0.0f;
+	rot_x_mat.m[1][0] = 0.0f; rot_x_mat.m[1][1] = cosf(degreeToRad(rotation.x));	rot_x_mat.m[1][2] = -sinf(degreeToRad(rotation.x));	rot_x_mat.m[1][3] = 0.0f;
+	rot_x_mat.m[2][0] = 0.0f; rot_x_mat.m[2][1] = sinf(degreeToRad(rotation.x));	rot_x_mat.m[2][2] = cosf(degreeToRad(rotation.x));	rot_x_mat.m[2][3] = 0.0f;
+	rot_x_mat.m[3][0] = 0.0f; rot_x_mat.m[3][1] = 0.0f;								rot_x_mat.m[3][2] = 0.0f;							rot_x_mat.m[3][3] = 1.0f;
+
+
+
+
+	Matrix4f rot_y_mat;
+
+	rot_y_mat.m[0][0] = cosf(degreeToRad(rotation.y));	rot_y_mat.m[0][1] = 0.0f;	rot_y_mat.m[0][2] = -sinf(degreeToRad(rotation.y));	rot_y_mat.m[0][3] = 0.0f;
+	rot_y_mat.m[1][0] = 0.0f;							rot_y_mat.m[1][1] = 1.0f;	rot_y_mat.m[1][2] = 0.0f;							rot_y_mat.m[1][3] = 0.0f;
+	rot_y_mat.m[2][0] = sinf(degreeToRad(rotation.y));	rot_y_mat.m[2][1] = 0.0f;	rot_y_mat.m[2][2] = cosf(degreeToRad(rotation.y));	rot_y_mat.m[2][3] = 0.0f;
+	rot_y_mat.m[3][0] = 0.0f;							rot_y_mat.m[3][1] = 0.0f;	rot_y_mat.m[3][2] = 0.0f;							rot_y_mat.m[3][3] = 1.0f;
+
+
+
+	Matrix4f rot_z_mat;
+
+	rot_z_mat.m[0][0] = cosf(degreeToRad(rotation.z));	rot_z_mat.m[0][1] = -sinf(degreeToRad(rotation.z));	rot_z_mat.m[0][2] = 0.0f;	rot_z_mat.m[0][3] = 0.0f;
+	rot_z_mat.m[1][0] = sinf(degreeToRad(rotation.z));	rot_z_mat.m[1][1] = cosf(degreeToRad(rotation.z));	rot_z_mat.m[1][2] = 0.0f;	rot_z_mat.m[1][3] = 0.0f;
+	rot_z_mat.m[2][0] = 0.0f;							rot_z_mat.m[2][1] = 0.0f;							rot_z_mat.m[2][2] = 1.0f;	rot_z_mat.m[2][3] = 0.0f;
+	rot_z_mat.m[3][0] = 0.0f;							rot_z_mat.m[3][1] = 0.0f;							rot_z_mat.m[3][2] = 0.0f;	rot_z_mat.m[3][3] = 1.0f;
+
+
+	Matrix4f translation_mat;
+
+	translation_mat.m[0][0] = 1.0f; translation_mat.m[0][1] = 0.0f; translation_mat.m[0][2] = 0.0f; translation_mat.m[0][3] = position.x;
+	translation_mat.m[1][0] = 0.0f; translation_mat.m[1][1] = 1.0f; translation_mat.m[1][2] = 0.0f; translation_mat.m[1][3] = position.y;
+	translation_mat.m[2][0] = 0.0f; translation_mat.m[2][1] = 0.0f; translation_mat.m[2][2] = 1.0f; translation_mat.m[2][3] = position.z;
+	translation_mat.m[3][0] = 0.0f; translation_mat.m[3][1] = 0.0f; translation_mat.m[3][2] = 0.0f; translation_mat.m[3][3] = 1.0f;
+
+	local_matrix = translation_mat * rot_z_mat * rot_y_mat * rot_x_mat;
 }
 
 void RenderObject::updateWorldMatrix()

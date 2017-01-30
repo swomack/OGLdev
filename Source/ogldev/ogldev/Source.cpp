@@ -25,7 +25,7 @@ void update_uniform()
 {
 	static float scale = 0.0f;
 
-	scale += 0.01f;
+	scale += 1;
 
 	if (main_scene)
 	{
@@ -33,7 +33,7 @@ void update_uniform()
 
 		if (mesh)
 		{
-			mesh->setPosition(sinf(scale), 0.0f, 0.0f);
+			mesh->rotateZ(scale);
 		}
 	}
 }

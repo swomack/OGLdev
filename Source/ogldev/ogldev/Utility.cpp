@@ -86,3 +86,8 @@ GLuint ogldev_graphics_utlity::generateShaderObject(const std::string & shader_s
 
 	return shader_obj;
 }
+
+float ogldev_math_utility::degreeToRad(float degree)
+{
+	return (PI * degree) / 180.0;
+}

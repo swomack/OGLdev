@@ -25,6 +25,13 @@ public:
 	}
 };
 
+
+namespace ogldev_math_utility
+{
+	const float PI = 3.14159;
+	float degreeToRad(float degree);
+};
+
 namespace ogldev_utility
 {
 	std::string readFile(std::experimental::filesystem::path filePath);
