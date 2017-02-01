@@ -9,7 +9,7 @@
 using namespace std;
 using namespace ogldev_math_utility;
 
-RenderObject::RenderObject(string name) : parent(NULL), position(0, 0, 0), rotation(0, 0, 0)
+RenderObject::RenderObject(string name) : parent(NULL), position(0, 0, 0), rotation(0, 0, 0), scale(1, 1, 1)
 {
 	this->name = name;
 
@@ -113,9 +113,36 @@ void RenderObject::rotateZ(float z)
 	rotation.z = z;
 }
 
+void RenderObject::setScale(float x, float y, float z)
+{
+	scale.x = x;
+	scale.y = y;
+	scale.z = z;
+}
+
+void RenderObject::scaleX(float x)
+{
+	scale.x = x;
+}
+
+void RenderObject::scaleY(float y)
+{
+	scale.y = y;
+}
+
+void RenderObject::scaleZ(float z)
+{
+	scale.z = z;
+}
+
 void RenderObject::updateMatrix()
 {
-	// we need to multiply position, rotation and scale matrix here
+	Matrix4f scale_mat;
+
+	scale_mat.m[0][0] = scale.x;	scale_mat.m[0][1] = 0.0f;		scale_mat.m[0][2] = 0.0f;		scale_mat.m[0][3] = 0.0f;
+	scale_mat.m[1][0] = 0.0f;		scale_mat.m[1][1] = scale.y;	scale_mat.m[1][2] = 0.0f;		scale_mat.m[1][3] = 0.0f;
+	scale_mat.m[2][0] = 0.0f;		scale_mat.m[2][1] = 0.0f;		scale_mat.m[2][2] = scale.z;	scale_mat.m[2][3] = 0.0f;
+	scale_mat.m[3][0] = 0.0f;		scale_mat.m[3][1] = 0.0f;		scale_mat.m[3][2] = 0.0f;		scale_mat.m[3][3] = 1.0f;
 
 	Matrix4f rot_x_mat;
 
@@ -151,7 +178,7 @@ void RenderObject::updateMatrix()
 	translation_mat.m[2][0] = 0.0f; translation_mat.m[2][1] = 0.0f; translation_mat.m[2][2] = 1.0f; translation_mat.m[2][3] = position.z;
 	translation_mat.m[3][0] = 0.0f; translation_mat.m[3][1] = 0.0f; translation_mat.m[3][2] = 0.0f; translation_mat.m[3][3] = 1.0f;
 
-	local_matrix = translation_mat * rot_z_mat * rot_y_mat * rot_x_mat;
+	local_matrix = translation_mat * rot_z_mat * rot_y_mat * rot_x_mat * scale_mat;
 }
 
 void RenderObject::updateWorldMatrix()
