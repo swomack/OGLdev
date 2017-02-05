@@ -4,7 +4,10 @@ layout(location = 0) in vec3 Position;
 
 uniform mat4 matrixWorld;
 
+out vec4 vColor;
+
 void main()
 {
 	gl_Position = matrixWorld * vec4(Position, 1.0);
+	vColor = vec4(clamp(Position, 0.0, 1.0), 1.0);
 }
