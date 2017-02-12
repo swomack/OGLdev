@@ -90,7 +90,7 @@ void createScene()
 	
 
 	RenderGeometry* geom = new RenderGeometry();
-	geom->setPosition(vertices);
+	geom->setPosition(std::move(vertices));
 	geom->setPrimitiveType(TRIANGLE_PRIMITIVE);
 
 	ShaderMaterial* material = new ShaderMaterial("Shaders/VertexShader.txt", "Shaders/FragmentShader.txt");
