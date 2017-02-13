@@ -51,6 +51,11 @@ Vector3* RenderGeometry::getVerticesPositionAttributeReference()
 	return &(geometry_vertex_attributes.positions[0]);
 }
 
+size_t RenderGeometry::getIndicesSize()
+{
+	return sizeof(unsigned int) * indices.size();
+}
+
 void RenderGeometry::setPrimitiveType(unsigned int primitive_type)
 {
 	this->primitive_type = primitive_type;

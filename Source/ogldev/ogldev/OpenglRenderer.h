@@ -29,6 +29,7 @@ public:
 protected:
 
 	GLuint initializeVertexBuffer(RenderGeometry* geometry);
+	GLuint initializeIndexBuffer(RenderGeometry* geometry);
 	void drawMesh(RenderMesh* mesh, Camera* camera);
 	void initiateMaterial(RenderMaterial* material);
 	void updateTransformationMatrixUniforms(RenderMesh* mesh, RenderMaterial* material);
@@ -42,4 +43,5 @@ protected:
 	void renderOpaque(std::vector<RenderMesh*> &opaque, Camera* camera);
 
 	std::unordered_map<std::string, GLuint> uuid_VBO_map;
+	std::unordered_map<std::string, GLuint> uuid_IBO_map;
 };

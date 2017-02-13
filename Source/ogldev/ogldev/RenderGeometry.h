@@ -25,6 +25,7 @@ public:
 	virtual size_t getVerticesPositionAttributeSize();
 	virtual Vector3* getVerticesPositionAttributeReference();
 
+	virtual size_t getIndicesSize();
 
 	void setPrimitiveType(unsigned int primitive_type);
 	unsigned int getPrimitiveType() const;

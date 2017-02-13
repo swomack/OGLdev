@@ -60,6 +60,18 @@ GLuint OpenglRenderer::initializeVertexBuffer(RenderGeometry * geometry)
 	return VBO;
 }
 
+GLuint OpenglRenderer::initializeIndexBuffer(RenderGeometry * geometry)
+{
+	GLuint IBO;
+
+	glGenBuffers(1, &IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, geometry->getIndicesSize(), geometry->getIndices(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	return IBO;
+}
+
 void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 {
 	if (mesh == NULL)
@@ -74,8 +86,22 @@ void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 	const string string_id = geom->get_string_id();
 	if (uuid_VBO_map[string_id] == NULL)
 	{
-		GLuint vertex_buffer_id = initializeVertexBuffer(geom);
-		uuid_VBO_map[string_id] = vertex_buffer_id;
+		uuid_VBO_map[string_id] = initializeVertexBuffer(geom);
+	}
+
+	if (geom->getDrawType() == draw_type::DRAW_ELEMENTS)
+	{
+		if (uuid_IBO_map[string_id] == NULL)
+		{
+			uuid_IBO_map[string_id] = initializeIndexBuffer(geom);
+		}
+
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, uuid_IBO_map[string_id]);
+	}
+	else
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, uuid_VBO_map[string_id]);
