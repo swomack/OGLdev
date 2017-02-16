@@ -113,7 +113,10 @@ void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 
 	updateTransformationMatrixUniforms(mesh, material);
 
-	glDrawArrays(geom->getPrimitiveType(), 0, geom->getNumberofDrawableVertices());
+	if (geom->getDrawType() == draw_type::DRAW_ELEMENTS)
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	else
+		glDrawArrays(geom->getPrimitiveType(), 0, geom->getNumberofDrawableVertices());
 
 	glDisableVertexAttribArray(0);
 }

@@ -33,8 +33,8 @@ void update_uniform()
 
 		if (mesh)
 		{
-			mesh->rotateZ(scale);
-			mesh->setScale(sinf(scale), sinf(scale));
+			//mesh->rotateZ(scale);
+			//mesh->setScale(sinf(scale), sinf(scale));
 		}
 	}
 }
@@ -83,14 +83,24 @@ void createScene()
 {
 	main_scene = new RenderScene();
 
-	vector<Vector3> vertices(3);
-	vertices[0] = Vector3(0.0f, 1.0f, 0.0f);
-	vertices[1] = Vector3(-1.0f, -1.0f, 0.0f);
-	vertices[2] = Vector3(1.0f, -1.0f, 0.0f);
-	
+	vector<Vector3> vertices(8);
+	vertices[0] = Vector3(0.5f, 0.5f, 0.5f);
+	vertices[1] = Vector3(-0.5f, 0.5f, 0.5f);
+	vertices[2] = Vector3(-0.5f, 0.5f, -0.5f);
+	vertices[3] = Vector3(0.5f, 0.5f, -0.5f);
+	vertices[4] = Vector3(0.5f, -0.5f, 0.5f);
+	vertices[5] = Vector3(-0.5f, -0.5f, 0.5f);
+	vertices[6] = Vector3(-0.5f, -0.5f, -0.5f);
+	vertices[7] = Vector3(0.5f, -0.5f, -0.5f);
+
 
 	RenderGeometry* geom = new RenderGeometry();
-	geom->setPosition(std::move(vertices));
+	geom->setPosition(move(vertices));
+
+	vector<unsigned int> indices{ 0,1,5,0,5,4,1,2,6,1,6,5,2,3,7,2,7,6,3,4,7,3,1,4,0,3,2,0,2,1,4,5,7,5,6,7 };
+	//vector<unsigned int> indices{ 0,1,5 };
+	geom->setIndices(move(indices));
+	geom->setDrawType(draw_type::DRAW_ELEMENTS);
 	geom->setPrimitiveType(TRIANGLE_PRIMITIVE);
 
 	ShaderMaterial* material = new ShaderMaterial("Shaders/VertexShader.txt", "Shaders/FragmentShader.txt");
