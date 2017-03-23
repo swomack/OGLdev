@@ -32,7 +32,7 @@ protected:
 	GLuint initializeIndexBuffer(RenderGeometry* geometry);
 	void drawMesh(RenderMesh* mesh, Camera* camera);
 	void initiateMaterial(RenderMaterial* material);
-	void updateTransformationMatrixUniforms(RenderMesh* mesh, RenderMaterial* material);
+	void updateTransformationMatrixUniforms(RenderMesh* mesh, RenderMaterial* material, Camera* camera);
 	void initiateShaderMaterial(ShaderMaterial* shader_material);
 	void updateUniforms(ShaderMaterial* shader_material);
 

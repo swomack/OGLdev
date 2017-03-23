@@ -111,7 +111,7 @@ void OpenglRenderer::drawMesh(RenderMesh * mesh, Camera * camera)
 	if (material)
 		initiateMaterial(material);
 
-	updateTransformationMatrixUniforms(mesh, material);
+	updateTransformationMatrixUniforms(mesh, material, camera);
 
 	if (geom->getDrawType() == draw_type::DRAW_ELEMENTS)
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -127,14 +127,17 @@ void OpenglRenderer::initiateMaterial(RenderMaterial * material)
 	initiateShaderMaterial(shader_material);
 }
 
-void OpenglRenderer::updateTransformationMatrixUniforms(RenderMesh * object, RenderMaterial* material)
+void OpenglRenderer::updateTransformationMatrixUniforms(RenderMesh * object, RenderMaterial* material, Camera* camera)
 {
 	ShaderMaterial* shader_material = dynamic_cast<ShaderMaterial*> (material);
 	GLuint gWorldLocation = glGetUniformLocation(shader_material->getShaderProgram(), world_matrix.c_str());
 
 	if (gWorldLocation != 0xFFFFFFFF)
 	{
-		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, &object->world_matrix.m[0][0]);
+		Matrix4f m = camera->get_projection_matrix();
+		m *= object->world_matrix;
+
+		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, &m.m[0][0]);
 	}
 }
 
