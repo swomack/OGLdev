@@ -91,6 +91,21 @@ void RenderObject::setPosition(const Vector3 & position)
 	this->position.z = position.z;
 }
 
+void RenderObject::translateX(float x)
+{
+	position.x += x;
+}
+
+void RenderObject::translateY(float y)
+{
+	position.y += y;
+}
+
+void RenderObject::translateZ(float z)
+{
+	position.z += z;
+}
+
 void RenderObject::setRotation(float x, float y, float z)
 {
 	rotation.x = x;
@@ -100,17 +115,17 @@ void RenderObject::setRotation(float x, float y, float z)
 
 void RenderObject::rotateX(float x)
 {
-	rotation.x = x;
+	rotation.x += x;
 }
 
 void RenderObject::rotateY(float y)
 {
-	rotation.y = y;
+	rotation.y += y;
 }
 
 void RenderObject::rotateZ(float z)
 {
-	rotation.z = z;
+	rotation.z += z;
 }
 
 void RenderObject::setScale(float x, float y, float z)

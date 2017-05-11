@@ -28,6 +28,10 @@ public:
 
 	void setPosition(float x = 0, float y = 0, float z = 0);
 	void setPosition(const Vector3& position);
+	void translateX(float x);
+	void translateY(float y);
+	void translateZ(float z);
+
 	void setRotation(float x = 0, float y = 0, float z = 0);
 	void rotateX(float x);
 	void rotateY(float y);

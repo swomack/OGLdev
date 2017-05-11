@@ -25,7 +25,7 @@ void OpenglRenderer::renderScene(RenderScene * scene, Camera * camera)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	if (scene == NULL)
+	if (scene == NULL || camera == NULL)
 		return;
 
 
@@ -131,13 +131,17 @@ void OpenglRenderer::updateTransformationMatrixUniforms(RenderMesh * object, Ren
 {
 	ShaderMaterial* shader_material = dynamic_cast<ShaderMaterial*> (material);
 	GLuint gWorldLocation = glGetUniformLocation(shader_material->getShaderProgram(), world_matrix.c_str());
+	GLuint gProjectionLocation = glGetUniformLocation(shader_material->getShaderProgram(), projection_matrix.c_str());
 
 	if (gWorldLocation != 0xFFFFFFFF)
 	{
-		Matrix4f m = camera->get_projection_matrix();
-		m *= object->world_matrix;
+		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, &object->world_matrix.m[0][0]);
+	}
 
-		glUniformMatrix4fv(gWorldLocation, 1, GL_TRUE, &m.m[0][0]);
+	if (gProjectionLocation != 0xFFFFFFFF)
+	{
+		Matrix4f m = camera->get_projection_matrix();
+		glUniformMatrix4fv(gProjectionLocation, 1, GL_TRUE, &m.m[0][0]);
 	}
 }
 

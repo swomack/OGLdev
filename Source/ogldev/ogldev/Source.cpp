@@ -10,22 +10,26 @@
 #include "PrimitiveDefinitions.h"
 #include "ShaderMaterial.h"
 
+#include "Camera.h"
+
 #include <vector>
 
 using namespace std;
 
 
+const int WINDOW_WIDTH = 1024;
+const int WINDOW_HEIGHT = 768;
+
 window_manager window;
 OpenglRenderer renderer;
 
 RenderScene *main_scene = NULL;
+Camera* main_camera = NULL;
 
 
 void update_uniform()
 {
-	static float scale = 0.0f;
-
-	scale += 0.1;
+	static float scale = 0.1f;
 
 	if (main_scene)
 	{
@@ -33,8 +37,7 @@ void update_uniform()
 
 		if (mesh)
 		{
-			//mesh->rotateZ(scale);
-			//mesh->setScale(sinf(scale), sinf(scale));
+			mesh->translateZ(scale);
 		}
 	}
 }
@@ -42,7 +45,7 @@ void update_uniform()
 void render()
 {
 	update_uniform();
-	renderer.renderScene(main_scene);
+	renderer.renderScene(main_scene, main_camera);
 	glutSwapBuffers();
 }
 
@@ -111,6 +114,12 @@ void createScene()
 	main_scene->addChild(mesh);
 }
 
+void addCamera()
+{
+	main_camera = new Camera();
+	main_camera->set_camera_parameter(60.0f, WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.001, 10000);
+}
+
 int main(int argc, char** argv)
 {
 	initializeWindow(argc, argv);
@@ -122,6 +131,8 @@ int main(int argc, char** argv)
 	initializeRenderer();
 
 	createScene();
+
+	addCamera();
 
 	startMessageLoop();
 }
