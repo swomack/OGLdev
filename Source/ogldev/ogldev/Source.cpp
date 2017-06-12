@@ -37,7 +37,7 @@ void update_uniform()
 
 		if (mesh)
 		{
-			mesh->translateZ(scale);
+			//mesh->translateZ(scale);
 		}
 	}
 }
@@ -110,7 +110,7 @@ void createScene()
 	RenderMesh* mesh = new RenderMesh("ScaleMesh");
 	mesh->setGeometry(geom);
 	mesh->setMaterial(material);
-
+	mesh->setPosition(0.0, 0.0, 1.5);
 	main_scene->addChild(mesh);
 }
 
