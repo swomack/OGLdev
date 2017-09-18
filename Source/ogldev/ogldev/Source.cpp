@@ -13,6 +13,7 @@
 #include "Camera.h"
 
 #include <vector>
+#include <array>
 
 using namespace std;
 
@@ -86,7 +87,49 @@ void createScene()
 {
 	main_scene = new RenderScene();
 
+
+	array<float, 6> box = { -0.5, -0.5, 0.5, 0.5, 0.5, -0.5 };
+
 	vector<Vector3> vertices(8);
+
+	float hight = box[4] - box[1];
+	float width = box[3] - box[0];
+	float depth = box[5] - box[2];
+
+	// fill the vertex buffer
+	/*Vector3 v;
+	v.set(box[0], box[1], box[2]);
+	vertices.push_back(v);
+
+	Vector3 v1;
+	v1.set(box[0], box[1] + hight, box[2]);
+	vertices.push_back(v1);
+
+	Vector3 v2;
+	v2.set(box[0] - width, box[1] + hight, box[2]);
+	vertices.push_back(v2);
+
+	Vector3 v3;
+	v3.set(box[0] - width, box[1], box[2]);
+	vertices.push_back(v3);
+
+	Vector3 v4;
+	v4.set(box[3], box[4], box[5]);
+	vertices.push_back(v4);
+	
+
+	Vector3 v5;
+	v5.set(box[3], box[4] - hight, box[5]);
+	vertices.push_back(v5);
+
+	Vector3 v6;
+	v6.set(box[3] + width, box[4] - hight, box[5]);
+	vertices.push_back(v6);
+
+	Vector3 v7;
+	v7.set(box[3] + width, box[4], box[5]);
+	vertices.push_back(v7);*/
+
 	vertices[0] = Vector3(0.5f, 0.5f, 0.5f);
 	vertices[1] = Vector3(-0.5f, 0.5f, 0.5f);
 	vertices[2] = Vector3(-0.5f, 0.5f, -0.5f);
@@ -100,8 +143,11 @@ void createScene()
 	RenderGeometry* geom = new RenderGeometry();
 	geom->setPosition(move(vertices));
 
-	vector<unsigned int> indices{ 0,1,5,0,5,4,1,2,6,1,6,5,2,3,7,2,7,6,3,4,7,3,1,4,0,3,2,0,2,1,4,5,7,5,6,7 };
-	//vector<unsigned int> indices{ 0,1,5 };
+	vector<unsigned int> indices = { 0, 1, 5, 0, 5, 4, 1, 2, 6, 1, 6, 5, 2, 3, 7, 2, 7, 6, 3, 4, 7, 3, 1, 4, 0, 3, 2, 0, 2, 1, 4, 5, 7, 5, 6, 7 };
+
+
+
+
 	geom->setIndices(move(indices));
 	geom->setDrawType(draw_type::DRAW_ELEMENTS);
 	geom->setPrimitiveType(TRIANGLE_PRIMITIVE);
@@ -110,7 +156,7 @@ void createScene()
 	RenderMesh* mesh = new RenderMesh("ScaleMesh");
 	mesh->setGeometry(geom);
 	mesh->setMaterial(material);
-	mesh->setPosition(0.0, 0.0, 1.5);
+	mesh->setPosition(0.0, 0.0, 5.0);
 	main_scene->addChild(mesh);
 }
 
